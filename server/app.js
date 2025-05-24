@@ -8,6 +8,7 @@ const PORT = 3000;
 // and configure it to send data from server to web-page/fron-end.
 
 // Middleware
+// User Body-Parser to handle incoming form data in both JSON and URL-encoded formats.
 app.set('view engine', 'ejs');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -31,6 +32,8 @@ app.get("/", (req, res) => {
 });
 
 // Add User Route:
+// When user submits form to add new user,
+// the POST route receives the form data via req.body and creates new user.
 app.post("/", (req, res) => {
   const newUser = {
     userUniqueId: req.body.userUniqueId,
@@ -44,6 +47,9 @@ app.post("/", (req, res) => {
 });
 
 // Delete User Route:
+// When userUniqueId is submitted,
+// the system fiters out the user from the user's array
+// and then updates the displayed list
 app.post('/delete', (req, res) => {
   const requestedUserUniqueId = req.body.userUniqueId;
   users = users.filter(user => user.userUniqueId !== requestedUserUniqueId);
@@ -52,6 +58,9 @@ app.post('/delete', (req, res) => {
 });
 
 // Update User Route:
+// When a user's new details are submitted
+// the system updates the users information in the users arrray
+// and then re-renders updated users array.
 app.post('/update', (req, res) => {
   users.forEach(user => {
     if (user.userUniqueId === req.body.userUniqueId) {
