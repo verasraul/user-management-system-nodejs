@@ -35,6 +35,7 @@ app.get("/", (req, res) => {
 // When user submits form to add new user,
 // the POST route receives the form data via req.body and creates new user.
 app.post("/", (req, res) => {
+  console.log(req.body);
   const newUser = {
     userUniqueId: req.body.userUniqueId,
     userName: req.body.userName,
@@ -62,7 +63,9 @@ app.post('/delete', (req, res) => {
 // the system updates the users information in the users arrray
 // and then re-renders updated users array.
 app.post('/update', (req, res) => {
+  console.log(req.body);
   users.forEach(user => {
+    console.log(req.body);
     if (user.userUniqueId === req.body.userUniqueId) {
       user.userName = req.body.userName;
       user.userEmail = req.body.userEmail;
